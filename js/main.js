@@ -1,4 +1,4 @@
-let startBtn = document.querySelector('#start'),
+const startBtn = document.querySelector('#start'),
     values = document.querySelectorAll('.budget-value, .daybudget-value, .level-value, .expenses-value, .optionalexpenses-value, .income-value, .monthsavings-value, .yearsavings-value'),
     expInput = document.querySelectorAll('.expenses-item'),
     data = document.querySelector('.data'),
@@ -21,13 +21,13 @@ let money, time, appData ;
     btnOptExp.disabled = true;
     btnCount.disabled = true;
 
-    startBtn.addEventListener('click', function(){
+    startBtn.addEventListener('click', ()=>{
     btnExp.disabled = false;
     btnOptExp.disabled = false;
     btnCount.disabled = false;
     time = prompt ('Введите дату в формате YYYY-MM-DD', '');
     money = +prompt ('Ваш бюджет на месяц?' , '');
-while (time == '' || time == '' || time == null){
+while (time == '' || time == ' ' || time == null){
     time = prompt('Пожалуйста, введите дату в формате YYYY-MM-DD');
     }      
 while (isNaN(money) || money == '' || money == null){
@@ -43,9 +43,9 @@ while (isNaN(money) || money == '' || money == null){
 
 let sum = 0;
 
-btnExp.addEventListener('click', function(){
+btnExp.addEventListener('click', ()=>{
     for (let i = 0; i < expInput.length; i++) {
-        let a = expInput[i].value,
+        const a = expInput[i].value,
             b = expInput[++i].value;
             
             if ((typeof(a)) != null && (typeof(b)) != null && a != '' && b != '' && a.length <50 ){
@@ -58,9 +58,9 @@ btnExp.addEventListener('click', function(){
     values[3].textContent = sum;
 });
 
-btnOptExp.addEventListener('click', function(){
+btnOptExp.addEventListener('click', ()=>{
     for (let i = 0; i < optExp.length; i++) {
-        let opt = optExp[i].value;
+        const opt = optExp[i].value;
         appData.optionalExpenses[i] = opt;
         while(appData.optionalExpenses[i] == '' ){ 
            i= i-4;
@@ -70,9 +70,9 @@ btnOptExp.addEventListener('click', function(){
     }
 });
 
-btnCount.addEventListener('click', function(){
+btnCount.addEventListener('click', ()=>{
     if(appData.budget != undefined){
-        let budgetEdited = appData.budget - sum;
+        const budgetEdited = appData.budget - sum;
         appData.moneyPerDay =  budgetEdited/30;
         values[1].textContent = appData.moneyPerDay;
     
@@ -92,14 +92,14 @@ btnCount.addEventListener('click', function(){
     }
 });
 
-chooseIncome.addEventListener('change', function (){
+chooseIncome.addEventListener('change', ()=>{
     let item = chooseIncome.value;
     appData.income = item.split(', ');
     values[5].textContent = appData.income;
    
 });
 
-checkSavings.addEventListener('click', function(){
+checkSavings.addEventListener('click', ()=>{
     if (appData.savings == true){
         appData.savings = false;
     } else {
@@ -107,7 +107,7 @@ checkSavings.addEventListener('click', function(){
     }
 });
 
-chooseSum.addEventListener('input', function(){
+chooseSum.addEventListener('input', ()=>{
     if (appData.savings == true){
         let sum = +chooseSum.value,
         persent = +choosePercent.value;
@@ -118,7 +118,7 @@ chooseSum.addEventListener('input', function(){
         values[7].textContent = appData.yerIncome.toFixed(1);
     }
 });
-choosePercent.addEventListener('input', function(){
+choosePercent.addEventListener('input', ()=>{
     if (appData.savings == true){
         let sum = +chooseSum.value,
         persent = +choosePercent.value;
